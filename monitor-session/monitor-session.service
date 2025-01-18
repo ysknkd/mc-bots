@@ -1,0 +1,13 @@
+[Unit]
+Description=Monitor Podman container logs for login/logout and notify via Slack
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/monitor-session.sh
+Restart=always
+RestartSec=10
+StartLimitInterval=300
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target
