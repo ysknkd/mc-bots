@@ -8,10 +8,11 @@ apt update > /dev/null 2>&1
 UPGRADABLE=$(apt list --upgradable 2>/dev/null | grep -v "Listing..." | wc -l)
 
 # 更新が必要な場合の通知
+HOSTNAME=$(uname -n)
 if [ "$UPGRADABLE" -gt 0 ]; then
-    MESSAGE="Raspberry Piに$UPGRADABLE個の更新可能なパッケージがあります。更新するには、\`sudo apt upgrade\`を実行してください。"
+    MESSAGE="$HOSTNAME: Raspberry Piに$UPGRADABLE個の更新可能なパッケージがあります。更新するには、\`sudo apt upgrade\`を実行してください。"
 else
-    MESSAGE="Raspberry Piは最新の状態です。更新は必要ありません。"
+    MESSAGE="$HOSTNAME: Raspberry Piは最新の状態です。更新は必要ありません。"
 fi
 
 # Slack に通知を送信
